@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://fonts.googleapis.com https://fonts.gstatic.com https://formsubmit.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Somewhere — procedurally generated watercolor paintings</title>
+<meta name="description" content="Procedurally generated watercolor paintings of places that feel familiar.">
+<meta name="theme-color" content="#12110f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Somewhere">
+<meta property="og:description" content="Procedurally generated watercolor paintings of places that feel familiar.">
+<meta property="og:image" content="https://saimalshafi.github.io/somewhere/assets/og.png">
+<meta property="og:url" content="https://saimalshafi.github.io/somewhere/">
+<link rel="canonical" href="https://saimalshafi.github.io/somewhere/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display+SC:wght@400;700&family=UnifrakturMaguntia&family=Cinzel:wght@500&family=Abril+Fatface&family=Zen+Antique&family=Noto+Serif+TC:wght@900&family=Noto+Sans+TC:wght@900&family=Black+Han+Sans&family=Lalezar&family=Noto+Nastaliq+Urdu:wght@600&family=Aref+Ruqaa:wght@700&family=Amiri:wght@700&family=Reem+Kufi:wght@600&family=Noto+Naskh+Arabic:wght@700&family=Anton&display=swap">
+<link rel="stylesheet" href="css/basti.css">
+</head>
+<body>
+<div class="app">
+  <section class="intro">
+    <h1>Somewhere</h1>
+    <p class="sub">Procedurally generated watercolor paintings<br>of places that feel familiar.</p>
+  </section>
+
+  <main class="stage">
+    <div class="page" id="page"><canvas id="cv" width="1100" height="1375" aria-label="Generated watercolour painting of a small building"></canvas><canvas id="bp" class="bp" width="1100" height="1375" aria-hidden="true"></canvas><div class="busy">painting…</div>
+      <div class="arrows"><button class="arrow" id="back" aria-label="Previous painting" disabled>←</button><button class="arrow" id="fwd" aria-label="Next painting" disabled>→</button></div>
+    </div>
+  </main>
+
+  <aside class="tools">
+    <div class="caption" aria-live="polite">
+      <div class="label">This building</div>
+      <div class="place" id="place">—</div>
+      <div class="what" id="what"></div>
+    </div>
+    <div class="layers">
+      <div class="label">Layers</div>
+      <div class="toggles" id="gLayers" role="group" aria-label="Layers"></div>
+    </div>
+    <div class="layers">
+      <div class="label">Export</div>
+      <div class="toggles" role="group" aria-label="Export">
+        <button class="toggle ex" id="exSVG" title="Vector file: sharp at any size, every wash and line editable (E)">SVG</button>
+        <button class="toggle ex" id="exPNG" title="Image at 3300 × 4125 px">PNG</button>
+        <button class="toggle ex" id="exGIF" title="The painting process, as a looping animation">GIF</button>
+      </div>
+    </div>
+    <div class="actions">
+    <button id="blueprint" class="wide" title="Replay how this painting was constructed: every decision, shape and calculation (B)">Watch it being built</button>
+    <button id="gen" class="primary wide">Somewhere new</button></div>
+    <button class="iconbtn info" id="infoBtn" aria-label="About Somewhere" aria-haspopup="dialog" title="About"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4.2" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".9" fill="currentColor" stroke="none"/></svg></button>
+  </aside>
+
+  <aside class="bpanel" id="bpanel" hidden aria-label="Blueprint">
+    <div class="bphead"><div class="label">Blueprint · <b id="bpSeed"></b></div><button class="x" id="bpClose" aria-label="Close the blueprint">Close</button></div>
+    <div class="bpacts" id="bpActs" role="group" aria-label="Jump to a stage"></div>
+    <div class="bpnow" id="bpNow" aria-live="polite"></div>
+    <div class="bpbar"><i id="bpProg"></i></div>
+    <div class="bpconhead"><span>Console</span><span title="The code is simplified for reading; every number in it is the one the engine actually used">pseudo-code · real values</span></div>
+    <div class="bpcon" id="bpCon" role="log"></div>
+    <div class="bpctl"><button id="bpPlay">Pause</button><div class="toggles" role="group" aria-label="Speed"><button class="toggle" id="bpS1" aria-pressed="true">1×</button><button class="toggle" id="bpS4" aria-pressed="false">4×</button></div><button id="bpEnd">Skip to end</button></div>
+  </aside>
+</div>
+
+<dialog class="about" id="about" aria-labelledby="aboutTitle">
+  <div class="head">
+    <div><h2 id="aboutTitle">Somewhere</h2><p class="tag">Procedurally generated watercolor paintings of places that feel familiar.</p></div>
+    <button class="iconbtn" id="aboutClose" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button>
+  </div>
+  <div class="body">
+    <p>Every painting is new. A building is designed from the architectural rules of a real place: its plot widths and storey heights, its materials and openings, its roofs, signs, plants and street life. Then it is set out in pencil, drawn in pen and painted in watercolour, live in your browser. Nothing is stored, and no two visitors see the same building.</p>
+    <h3>Currently included places <span class="n" id="placeCount"></span></h3>
+    <ul class="places" id="placeList"></ul>
+    <h3>Feedback / request</h3>
+    <form class="fb" id="fbForm" novalidate>
+      <label class="fl" for="fbMsg">Message</label>
+      <textarea id="fbMsg" name="message" maxlength="2000" required placeholder="What worked, what looked wrong, or a city or building style you would like to see added…"></textarea>
+      <label class="fl" for="fbEmail">Your email <small>(optional, only if you would like a reply)</small></label>
+      <input type="email" id="fbEmail" name="email" maxlength="200" autocomplete="email" placeholder="you@example.com">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="row"><button type="submit" class="primary" id="fbSend">Send</button><span class="status" id="fbStatus" role="status" aria-live="polite"></span></div>
+    </form>
+  </div>
+  <div class="foot">
+    <a class="gh" id="ghLink" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Source on GitHub</span></a>
+    <span>No accounts, no tracking.</span>
+  </div>
+</dialog>
+<noscript><p class="nojs">Somewhere paints in your browser, so it needs JavaScript turned on.</p></noscript>
+
+<script src="js/engine/core.js"></script>
+<script src="js/engine/styles.js"></script>
+<script src="js/engine/text.js"></script>
+<script src="js/engine/build.js"></script>
+<script src="js/engine/build2.js"></script>
+<script src="js/engine/build3.js"></script>
+<script src="js/engine/houses.js"></script>
+<script src="js/engine/flora.js"></script>
+<script src="js/engine/props.js"></script>
+<script src="js/engine/render.js"></script>
+<script src="js/engine/svg.js"></script>
+<script src="js/engine/gif.js"></script>
+<script src="js/engine/blueprint.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
