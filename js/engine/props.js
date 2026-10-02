@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — street props, placed by anchor slots rather than at random
+//  SOMEWHERE — street props, placed by anchor slots rather than at random
 //
 //  Slots come from the facade: each side of the door, in front of each window
 //  bay, the two ends of the frontage, and wall anchors (beside the door, the

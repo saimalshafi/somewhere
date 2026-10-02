@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — procedural architectural sketchbook
+//  SOMEWHERE — procedural architectural sketchbook
 //  Core: randomness, noise, projection, geometry, watercolor + ink primitives
 // ============================================================================
 'use strict';

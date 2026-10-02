@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — renderer: fit, painter's order, paper + granulation pass
+//  SOMEWHERE — renderer: fit, painter's order, paper texture, painting animation
 // ============================================================================
 // A paint job owns one scene and one canvas and can be run in slices: the same
 // items, in the same order, with the same per-item dice, so a page painted in
@@ -318,7 +318,8 @@ function animatePaint(canvas, seed, opts = {}) {
   const prepPops = kNow => {
     { const g = (src) => { const c = document.createElement('canvas'); c.width = mw; c.height = mh; const x = c.getContext('2d'); x.drawImage(src, 0, 0, mw, mh); return x.getImageData(0, 0, mw, mh).data; };
       const a = g(fullInk ? fullInk.canvas : ink.canvas), b = g(wet.canvas); for (let i = 0; i < mw * mh; i++) { const j = i * 4; bare[i] = Math.abs(a[j] - b[j]) + Math.abs(a[j + 1] - b[j + 1]) + Math.abs(a[j + 2] - b[j + 2]) < 4 ? 1 : 0; } }
-    const FROM = Math.max(POP_FROM, kNow + 0.1); // after the grain has settled on the bare paper around them kG0 = Math.max(0, kNow); // a heavy page may finish its layers after the wash has begun: planting then starts from here
+    const FROM = Math.max(POP_FROM, kNow + 0.1); // after the grain has settled on the bare paper around them
+    kG0 = Math.max(0, kNow); // a heavy page may finish its layers after the wash has begun: planting then starts from here
     const q = 4, sw = Math.ceil(W / q), sh = Math.ceil(H / q);
     const grab = src => { const c = document.createElement('canvas'); c.width = sw; c.height = sh; const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(src, 0, 0, sw, sh); return x.getImageData(0, 0, sw, sh).data; };
     const a = grab(grain), b = grab(fin.canvas), on = new Uint8Array(sw * sh);

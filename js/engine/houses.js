@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — dwellings
+//  SOMEWHERE — dwellings
 //  Every locale has houses as well as shops. A house type overrides parts of
 //  the style's rulebook (massing, ground floor, door, boundary, roof) while
 //  inheriting the rest (materials, windows, ornament, planting, script).

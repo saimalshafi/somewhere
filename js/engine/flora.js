@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — flora: species with growth rules and placement rules
+//  SOMEWHERE — flora: species with growth rules and placement rules
 //  Trees stand on the side opposite the tall vertical; shrubs anchor base
 //  corners; climbers grow from soil up walls or hang from ledges; pots and
 //  window boxes follow the style's planting list.

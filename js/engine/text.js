@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — real lettering
+//  SOMEWHERE — real lettering
 //  A style's origin fixes its script, language and typefaces. Shop signs use
 //  the local word for the trade and a local naming pattern (surname + trade in
 //  Japan, "X記" names in the Straits, Persian/Arabic "trade + name" order).

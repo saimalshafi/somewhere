@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — architecture painters (part 2): openings, ground floors, upper floors
+//  SOMEWHERE — architecture painters (part 2): openings, ground floors, upper floors
 // ============================================================================
 
 // ---------------------------------------------------------------- windows

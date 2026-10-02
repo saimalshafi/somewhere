@@ -1,4 +1,20 @@
+# OS
 .DS_Store
 Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Media and working files
+*.mov
+*.mp4
+*.webm
+recordings/
+screenshots/
 Claude outputs/
-*.log
+
+# Node
+node_modules/
+npm-debug.log*

@@ -95,7 +95,7 @@ function bpTimeline(S, k) {
   add(0, 0, [], (k, u) => { for (let x = 50; x < W; x += 50) k.seg([x, 0], [x, H], B, 0.05, 0.6); for (let y = 50; y < H; y += 50) k.seg([0, y], [W, y], B, 0.05, 0.6); });
 
   // 1 — THE DICE: each decision drawn as a bar of its options, with the roll landing in one
-  head(0, [`seed = ${S.seed}  // 0x${S.seed.toString(16).padStart(8, '0')}, from crypto.getRandomValues`, `R = mulberry32(hash('basti', seed))  // every choice below is one roll of R`]);
+  head(0, [`seed = ${S.seed}  // 0x${S.seed.toString(16).padStart(8, '0')}, from crypto.getRandomValues`, `R = mulberry32(hash('somewhere', seed))  // every choice below is one roll of R`]);
   // rows are as tall as their bars: a long list (every locale) stands its names upright so all of them fit
   const d1 = logs(0), bw = W * 0.68, bhs = d1.map(e => bpDiceBar(k, e, bw).bh), rows = bhs.map(bh => bh + 46 * k.lw), tot = rows.reduce((a, b) => a + b, 0);
   let yy = H * 0.5 - tot / 2 + 14 * k.lw;

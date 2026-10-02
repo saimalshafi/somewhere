@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — building grammar + architecture painters (part 1)
+//  SOMEWHERE — building grammar + architecture painters (part 1)
 //  generate(seed, lock) -> scene { items: [{order, fn}], recv, bounds, view, desc }
 //  Every decision is made here in world units (cm), constrained by the style's
 //  rulebook (engine_styles.js). Painters run later, back to front.
@@ -112,7 +112,7 @@ function logFixed(S, stage, choice, why) { S.log.push({ stage, kind: 'fixed', ch
 
 // ---------------------------------------------------------------- the grammar
 function generate(seed, lock = {}) {
-  const R = new Rand(hash('basti', seed));
+  const R = new Rand(hash('somewhere', seed));
   const S = { seed, items: [], recv: [], bounds: [], stains: [], log: [], debug: { vols: [], bays: [], rays: [], slots: [], props: [], opens: [], plants: [] } };
   let seq = 0;
   S.add = (order, fn) => S.items.push(TRACE ? { order, fn, id: seq++, tag: callerName() } : { order, fn, id: seq++ });

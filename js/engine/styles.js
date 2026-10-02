@@ -1,5 +1,5 @@
 // ============================================================================
-//  BASTI — style rulebooks
+//  SOMEWHERE — style rulebooks
 //  A style is not a colour theme. It is a set of constraints every builder must
 //  obey: massing, how floors relate, opening proportions and tops, ornament,
 //  roof form, signage script, what grows where, and what sits on the street.
